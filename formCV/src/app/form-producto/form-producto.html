@@ -1,0 +1,86 @@
+<h1>Registro de productos</h1>
+ <form #miForm="ngForm" (ngSubmit)="onSubmit(miForm)">
+
+    <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" ngModel required minlength="2" #nombre="ngModel" />
+        @if (nombre.invalid && nombre.touched) {
+        <small class="error">
+            @if (nombre.errors?.['required']) { El nombre del producto es obligatorio } @else { minimo 2 letras }
+        </small>
+        }
+    </div>
+
+    <div>
+        <label for="stock">Stock</label>
+        <input
+            type="number"
+            id="stock"
+            name="stock"
+            ngModel
+            required
+            min="1"
+            max="100"
+            #stock="ngModel"
+        />
+
+        @if (stock.invalid && stock.touched) {
+            <small class="error">
+            @if (stock.errors?.['required']) {
+                El stock es obligatorio.
+            } @else if (stock.errors?.['min']) {
+                El stock mínimo es 1.
+            } @else if (stock.errors?.['max']) {
+                Superaste el stock máximo de 100.
+            }
+            </small>
+        }
+    </div>
+
+    <div>
+        <label for="precio">Precio</label>
+        <input
+            type="number"
+            id="precio"
+            name="precio"
+            ngModel
+            required
+            min="0.01"
+            step="0.01"
+            #precio="ngModel"
+        />
+
+        @if (precio.invalid && precio.touched) {
+            <small class="error">
+            @if (precio.errors?.['required']) {
+                El precio es obligatorio.
+            } @else if (precio.errors?.['min']) {
+                El precio debe ser mayor a 0.
+            }
+            </small>
+        }
+    </div>
+
+
+<button type="submit" [disabled]="miForm.invalid">Enviar</button>
+</form>
+
+<h2>Personas registradas</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th><th>Apellido</th><th>DNI</th><th>Email</th>
+      <th>Sexo</th><th>Edad</th><th>Universidad</th><th>Juego favorito</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (e of estudiantes(); track $index) {
+      <tr>
+        <td>{{ e.nombre }}</td><td>{{ e.apellido }}</td><td>{{ e.dni }}</td><td>{{ e.email }}</td>
+        <td>{{ e.sexo }}</td><td>{{ e.edad }}</td><td>{{ e.universidad }}</td><td>{{ e.juego }}</td>
+      </tr>
+    } @empty {
+      <tr><td colspan="8">Sin registros</td></tr>
+    }
+  </tbody>
+</table>
