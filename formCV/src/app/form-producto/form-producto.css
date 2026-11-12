@@ -10,10 +10,37 @@
   color: #333333;
 }
 
+/* TITULO */
+h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #7f1d35;
+  margin-bottom: 20px;
+}
+
+/* GIF Y MENSAJE */
+.gif-container {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.gif-container img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+}
+
+.gif-container p {
+  color: #7f1d35;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
 /* FORMULARIO */
 form {
   max-width: 550px;
-  margin: 25px auto;
+  margin: 0 auto;
   padding: 35px;
   background-color: #ffffff;
   border-radius: 15px;
@@ -21,15 +48,7 @@ form {
   box-shadow: 0 8px 25px rgba(80, 20, 40, 0.10);
 }
 
-/* TITULO */
-h1 {
-  text-align: center;
-  font-size: 32px;
-  color: #7f1d35;
-  margin-bottom: 25px;
-}
-
-/* CAMPOS DEL FORMULARIO */
+/* CAMPOS */
 form div {
   display: flex;
   flex-direction: column;
@@ -55,14 +74,14 @@ select {
   transition: 0.3s;
 }
 
-/* EFECTO AL SELECCIONAR UN CAMPO */
+/* EFECTO AL SELECCIONAR */
 input:focus,
 select:focus {
   border-color: #c9184a;
   box-shadow: 0 0 5px rgba(201, 24, 74, 0.20);
 }
 
-/* ERRORES DE VALIDACION */
+/* ERRORES */
 .error {
   color: #d00000;
   font-size: 13px;
@@ -75,7 +94,7 @@ select.ng-invalid.ng-touched {
   background-color: #fff0f0;
 }
 
-/* BOTON REGISTRAR */
+/* BOTON */
 button {
   width: 100%;
   padding: 13px;
