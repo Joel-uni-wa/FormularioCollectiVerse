@@ -1,86 +1,107 @@
+
 <h1>Registro de productos</h1>
- <form #miForm="ngForm" (ngSubmit)="onSubmit(miForm)">
 
-    <div>
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" ngModel required minlength="2" #nombre="ngModel" />
-        @if (nombre.invalid && nombre.touched) {
-        <small class="error">
-            @if (nombre.errors?.['required']) { El nombre del producto es obligatorio } @else { minimo 2 letras }
-        </small>
+<form #miForm="ngForm" (ngSubmit)="onSubmit(miForm)">
+
+  <!-- Nombre -->
+  <div>
+    <label for="nombre">Nombre del producto</label>
+    <input
+      type="text"
+      id="nombre"
+      name="nombre"
+      ngModel
+      required
+      minlength="2"
+      #nombre="ngModel"
+    />
+
+    @if (nombre.invalid && nombre.touched) {
+      <small class="error">
+        @if (nombre.errors?.['required']) {
+          El nombre es obligatorio.
+        } @else {
+          El nombre debe tener mínimo 2 caracteres.
         }
-    </div>
-
-    <div>
-        <label for="stock">Stock</label>
-        <input
-            type="number"
-            id="stock"
-            name="stock"
-            ngModel
-            required
-            min="1"
-            max="100"
-            #stock="ngModel"
-        />
-
-        @if (stock.invalid && stock.touched) {
-            <small class="error">
-            @if (stock.errors?.['required']) {
-                El stock es obligatorio.
-            } @else if (stock.errors?.['min']) {
-                El stock mínimo es 1.
-            } @else if (stock.errors?.['max']) {
-                Superaste el stock máximo de 100.
-            }
-            </small>
-        }
-    </div>
-
-    <div>
-        <label for="precio">Precio</label>
-        <input
-            type="number"
-            id="precio"
-            name="precio"
-            ngModel
-            required
-            min="0.01"
-            step="0.01"
-            #precio="ngModel"
-        />
-
-        @if (precio.invalid && precio.touched) {
-            <small class="error">
-            @if (precio.errors?.['required']) {
-                El precio es obligatorio.
-            } @else if (precio.errors?.['min']) {
-                El precio debe ser mayor a 0.
-            }
-            </small>
-        }
-    </div>
-
-
-<button type="submit" [disabled]="miForm.invalid">Enviar</button>
-</form>
-
-<h2>Personas registradas</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th><th>Apellido</th><th>DNI</th><th>Email</th>
-      <th>Sexo</th><th>Edad</th><th>Universidad</th><th>Juego favorito</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (e of estudiantes(); track $index) {
-      <tr>
-        <td>{{ e.nombre }}</td><td>{{ e.apellido }}</td><td>{{ e.dni }}</td><td>{{ e.email }}</td>
-        <td>{{ e.sexo }}</td><td>{{ e.edad }}</td><td>{{ e.universidad }}</td><td>{{ e.juego }}</td>
-      </tr>
-    } @empty {
-      <tr><td colspan="8">Sin registros</td></tr>
+      </small>
     }
-  </tbody>
-</table>
+  </div>
+
+  <!-- Stock -->
+  <div>
+    <label for="stock">Stock</label>
+    <input
+      type="number"
+      id="stock"
+      name="stock"
+      ngModel
+      required
+      min="0.01"
+      #stock="ngModel"
+    />
+
+    @if (stock.invalid && stock.touched) {
+      <small class="error">
+        @if (stock.errors?.['required']) {
+          El stock es obligatorio.
+        } @else {
+          El stock debe ser mayor a 0.
+        }
+      </small>
+    }
+  </div>
+
+  <!-- Precio -->
+  <div>
+    <label for="precio">Precio (S/)</label>
+    <input
+      type="number"
+      id="precio"
+      name="precio"
+      ngModel
+      required
+      min="0.11"
+      step="0.01"
+      #precio="ngModel"
+    />
+
+    @if (precio.invalid && precio.touched) {
+      <small class="error">
+        @if (precio.errors?.['required']) {
+          El precio es obligatorio.
+        } @else {
+          El precio debe ser mayor a S/ 0.10.
+        }
+      </small>
+    }
+  </div>
+
+  <!-- Categoría -->
+  <div>
+    <label for="categoria">Categoría</label>
+    <select
+      id="categoria"
+      name="categoria"
+      ngModel
+      required
+      #categoria="ngModel"
+    >
+      <option value="" disabled>Selecciona una categoría</option>
+
+      @for (cat of categorias; track cat) {
+        <option [value]="cat">{{ cat }}</option>
+      }
+    </select>
+
+    @if (categoria.invalid && categoria.touched) {
+      <small class="error">
+        Debes seleccionar una categoría.
+      </small>
+    }
+  </div>
+
+  <button type="submit" [disabled]="miForm.invalid">
+    Registrar producto
+  </button>
+
+</form>

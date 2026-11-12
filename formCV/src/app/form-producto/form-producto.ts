@@ -1,16 +1,12 @@
-import { Component, signal } from '@angular/core';
+
+import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
-interface Estudiante {
+interface Producto {
   nombre: string;
-  apellido: string;
-  dni: string;
-  numero: string;
-  email: string;
-  sexo: string;
-  edad: number;
-  universidad: string;
-  juego: string;
+  stock: number;
+  precio: number;
+  categoria: string;
 }
 
 @Component({
@@ -20,11 +16,24 @@ interface Estudiante {
   styleUrl: './form-producto.css',
 })
 export class FormProducto {
-  universidades = ['ULASALLE', 'UNSA', 'UCSM', 'UTP', 'UCSP'];
-  estudiantes = signal<Estudiante[]>([]);
+
+  categorias = [
+    'Cartas coleccionables',
+    'Figuras',
+    'Peluches',
+    'Videojuegos',
+    'Accesorios',
+    'Otros'
+  ];
 
   onSubmit(form: NgForm) {
-    this.estudiantes.update((lista) => [...lista, form.value as Estudiante]);
+    if (form.invalid) return;
+
+    const producto: Producto = form.value;
+
+    console.log('Producto registrado correctamente:');
+    console.log(producto);
+
     form.resetForm();
   }
 }
