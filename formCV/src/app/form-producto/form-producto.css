@@ -1,46 +1,111 @@
 
+/* CONTENEDOR PRINCIPAL */
 :host {
   display: block;
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f8f8f8, #e9dce0);
+  color: #333333;
 }
 
+/* FORMULARIO */
+form {
+  max-width: 550px;
+  margin: 25px auto;
+  padding: 35px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  border-top: 4px solid #c9184a;
+  box-shadow: 0 8px 25px rgba(80, 20, 40, 0.10);
+}
+
+/* TITULO */
+h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #7f1d35;
+  margin-bottom: 25px;
+}
+
+/* CAMPOS DEL FORMULARIO */
 form div {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  margin-bottom: 0.8rem;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
+label {
+  font-weight: bold;
+  color: #7f1d35;
+}
+
+/* INPUTS Y SELECT */
 input[type='text'],
 input[type='number'],
 select {
-  padding: 0.5rem;
-  border: 1px solid #888;
+  padding: 12px;
+  border: 1px solid #cccccc;
+  border-radius: 7px;
+  font-size: 15px;
+  background-color: #ffffff;
+  outline: none;
+  transition: 0.3s;
 }
 
+/* EFECTO AL SELECCIONAR UN CAMPO */
+input:focus,
+select:focus {
+  border-color: #c9184a;
+  box-shadow: 0 0 5px rgba(201, 24, 74, 0.20);
+}
+
+/* ERRORES DE VALIDACION */
 .error {
   color: #d00000;
+  font-size: 13px;
   font-weight: bold;
 }
 
 input.ng-invalid.ng-touched,
 select.ng-invalid.ng-touched {
   border-color: #d00000;
-  background: #fff0f0;
+  background-color: #fff0f0;
 }
 
+/* BOTON REGISTRAR */
 button {
-  padding: 0.6rem 1.5rem;
-  background: #1565c0;
-  color: #fff;
-  border: 0;
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  background-color: #7f1d35;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #c9184a;
 }
 
 button:disabled {
-  background: #b0b0b0;
+  background-color: #b0b0b0;
   cursor: not-allowed;
+}
+
+/* DISEÑO RESPONSIVE */
+@media (max-width: 600px) {
+  form {
+    padding: 25px 20px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
 }
