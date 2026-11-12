@@ -1,0 +1,122 @@
+
+<h1>Crear publicación</h1>
+
+<div class="gif-container">
+  <img src="/formulario.gif" alt="Formulario de publicación">
+  <p>Completa los datos de tu publicación</p>
+</div>
+
+<form #miForm="ngForm" (ngSubmit)="onSubmit(miForm)">
+
+  <!-- Título -->
+  <div>
+    <label for="titulo">Título de la publicación</label>
+
+    <input
+      type="text"
+      id="titulo"
+      name="titulo"
+      ngModel
+      required
+      minlength="3"
+      pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]+$"
+      #titulo="ngModel"
+    />
+
+    @if (titulo.invalid && titulo.touched) {
+      <small class="error">
+        @if (titulo.errors?.['required']) {
+          El título es obligatorio.
+        } @else if (titulo.errors?.['minlength']) {
+          El título debe tener mínimo 3 caracteres.
+        } @else {
+          El título no debe contener caracteres especiales.
+        }
+      </small>
+    }
+  </div>
+
+  <!-- Descripción -->
+  <div>
+    <label for="descripcion">Descripción</label>
+
+    <textarea
+      id="descripcion"
+      name="descripcion"
+      ngModel
+      required
+      maxlength="255"
+      rows="4"
+      #descripcion="ngModel"
+    ></textarea>
+
+    <small class="contador">
+      {{ descripcion.value?.length || 0 }}/255 caracteres
+    </small>
+
+    @if (descripcion.invalid && descripcion.touched) {
+      <small class="error">
+        @if (descripcion.errors?.['required']) {
+          La descripción es obligatoria.
+        } @else {
+          La descripción no puede superar los 255 caracteres.
+        }
+      </small>
+    }
+  </div>
+
+  <!-- Tipo de publicación -->
+  <div>
+    <label for="tipo">Tipo de publicación</label>
+
+    <select
+      id="tipo"
+      name="tipo"
+      ngModel
+      required
+      #tipo="ngModel"
+    >
+      <option value="" disabled>Selecciona un tipo</option>
+
+      @for (opcion of tiposPublicacion; track opcion) {
+        <option [value]="opcion">{{ opcion }}</option>
+      }
+    </select>
+
+    @if (tipo.invalid && tipo.touched) {
+      <small class="error">
+        Debes seleccionar un tipo de publicación.
+      </small>
+    }
+  </div>
+
+  <!-- Estado del producto -->
+  <div>
+    <label for="estado">Estado del producto</label>
+
+    <select
+      id="estado"
+      name="estado"
+      ngModel
+      required
+      #estado="ngModel"
+    >
+      <option value="" disabled>Selecciona el estado</option>
+
+      @for (opcion of estadosProducto; track opcion) {
+        <option [value]="opcion">{{ opcion }}</option>
+      }
+    </select>
+
+    @if (estado.invalid && estado.touched) {
+      <small class="error">
+        Debes seleccionar el estado del producto.
+      </small>
+    }
+  </div>
+
+  <button type="submit" [disabled]="miForm.invalid">
+    Crear publicación
+  </button>
+
+</form>
